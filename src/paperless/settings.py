@@ -401,7 +401,7 @@ FORCE_SCRIPT_NAME, BASE_URL, LOGIN_URL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL 
 
 # DRF Spectacular settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Paperless-ngx REST API",
+    "TITLE": "Newel Docs REST API",
     "DESCRIPTION": "OpenAPI Spec for Paperless-ngx",
     "VERSION": "6.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
@@ -420,8 +420,16 @@ SPECTACULAR_SETTINGS = {
 WSGI_APPLICATION = "paperless.wsgi.application"
 ASGI_APPLICATION = "paperless.asgi.application"
 
-STATIC_URL = os.getenv("PAPERLESS_STATIC_URL", BASE_URL + "static/")
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "src-ui" / "dist" / "paperless-ui",
+]
+
+
 WHITENOISE_STATIC_PREFIX = "/static/"
+
 
 if machine().lower() == "aarch64":  # pragma: no cover
     _static_backend = "django.contrib.staticfiles.storage.StaticFilesStorage"
@@ -519,9 +527,9 @@ SOCIALACCOUNT_PROVIDERS = json.loads(
 SOCIAL_ACCOUNT_DEFAULT_GROUPS = __get_list("PAPERLESS_SOCIAL_ACCOUNT_DEFAULT_GROUPS")
 SOCIAL_ACCOUNT_SYNC_GROUPS = __get_boolean("PAPERLESS_SOCIAL_ACCOUNT_SYNC_GROUPS")
 
-MFA_TOTP_ISSUER = "Paperless-ngx"
+MFA_TOTP_ISSUER = "Newel Docs"
 
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Paperless-ngx] "
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Newel Docs] "
 
 DISABLE_REGULAR_LOGIN = __get_boolean("PAPERLESS_DISABLE_REGULAR_LOGIN")
 REDIRECT_LOGIN_TO_SSO = __get_boolean("PAPERLESS_REDIRECT_LOGIN_TO_SSO")
@@ -677,13 +685,16 @@ EMAIL_CERTIFICATE_FILE = __get_optional_path("PAPERLESS_EMAIL_CERTIFICATE_LOCATI
 # Database                                                                    #
 ###############################################################################
 def _parse_db_settings() -> dict:
-    databases = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": DATA_DIR / "db.sqlite3",
-            "OPTIONS": {},
-        },
+    DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.environ.get(
+            "PAPERLESS_DBNAME",
+            os.path.join(DATA_DIR, "db.sqlite3"),
+        ),
     }
+}
+
     if os.getenv("PAPERLESS_DBHOST"):
         # Have sqlite available as a second option for management commands
         # This is important when migrating to/from sqlite
@@ -768,6 +779,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 ###############################################################################
 
 LANGUAGE_CODE = "en-us"
+
+PAPERLESS_FRONTEND_PATH = BASE_DIR / "src-ui" / "dist" / "paperless-ui"
+PAPERLESS_FRONTEND_LANGUAGE = "en-US"
+
 
 LANGUAGES = [
     ("en-us", _("English (US)")),  # needs to be first to act as fallback language
@@ -907,23 +922,18 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
     "global_keyprefix": _REDIS_KEY_PREFIX,
 }
 
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT: Final[int] = __get_int("PAPERLESS_WORKER_TIMEOUT", 1800)
+CELERY_TASK_TRACK_STARTED = False
 
-CELERY_RESULT_EXTENDED = True
-CELERY_RESULT_BACKEND = "django-db"
-CELERY_CACHE_BACKEND = "default"
+CELERY_IGNORE_RESULT = True
+CELERY_TASK_IGNORE_RESULT = True
 
-# https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-serializer
+CELERY_RESULT_BACKEND = None
+CELERY_RESULT_EXTENDED = False
+
 CELERY_TASK_SERIALIZER = "pickle"
-# https://docs.celeryq.dev/en/stable/userguide/configuration.html#std-setting-accept_content
-CELERY_ACCEPT_CONTENT = ["application/json", "application/x-python-serialize"]
+CELERY_ACCEPT_CONTENT = ["pickle"]
 
-# https://docs.celeryq.dev/en/stable/userguide/configuration.html#beat-schedule
-CELERY_BEAT_SCHEDULE = _parse_beat_schedule()
 
-# https://docs.celeryq.dev/en/stable/userguide/configuration.html#beat-schedule-filename
-CELERY_BEAT_SCHEDULE_FILENAME = str(DATA_DIR / "celerybeat-schedule.db")
 
 
 # Cachalot: Database read cache.

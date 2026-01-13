@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: paperless-ngx\n"
+"Project-Id-Version: Newel-Docs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-12 17:41+0000\n"
 "PO-Revision-Date: 2025-12-12 17:44\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: paperless-ngx\n"
+"X-Crowdin-Project: Newel-Docs\n"
 "X-Crowdin-Project-ID: 500308\n"
 "X-Crowdin-Language: ms\n"
 "X-Crowdin-File: /dev/src/locale/en_US/LC_MESSAGES/django.po\n"
@@ -1240,7 +1240,7 @@ msgid "Invalid variable detected."
 msgstr ""
 
 #: documents/templates/account/account_inactive.html:5
-msgid "Paperless-ngx account inactive"
+msgid "Newel-Docs account inactive"
 msgstr ""
 
 #: documents/templates/account/account_inactive.html:9
@@ -1267,7 +1267,7 @@ msgid "Thank you for using %(site_name)s!\n"
 msgstr ""
 
 #: documents/templates/account/login.html:5
-msgid "Paperless-ngx sign in"
+msgid "Newel-Docs sign in"
 msgstr ""
 
 #: documents/templates/account/login.html:10
@@ -1305,7 +1305,7 @@ msgid "or sign in via"
 msgstr ""
 
 #: documents/templates/account/password_reset.html:5
-msgid "Paperless-ngx reset password request"
+msgid "Newel-Docs reset password request"
 msgstr ""
 
 #: documents/templates/account/password_reset.html:9
@@ -1321,7 +1321,7 @@ msgid "Send me instructions!"
 msgstr ""
 
 #: documents/templates/account/password_reset_done.html:5
-msgid "Paperless-ngx reset password sent"
+msgid "Newel-Docs reset password sent"
 msgstr ""
 
 #: documents/templates/account/password_reset_done.html:9
@@ -1333,7 +1333,7 @@ msgid "We've emailed you instructions for setting your password. You should rece
 msgstr ""
 
 #: documents/templates/account/password_reset_from_key.html:5
-msgid "Paperless-ngx reset password confirmation"
+msgid "Newel-Docs reset password confirmation"
 msgstr ""
 
 #: documents/templates/account/password_reset_from_key.html:9
@@ -1357,7 +1357,7 @@ msgid "Change my password"
 msgstr ""
 
 #: documents/templates/account/password_reset_from_key_done.html:5
-msgid "Paperless-ngx reset password complete"
+msgid "Newel-Docs reset password complete"
 msgstr ""
 
 #: documents/templates/account/password_reset_from_key_done.html:9
@@ -1370,7 +1370,7 @@ msgid "Your new password has been set. You can now <a href=\"%(login_url)s\">log
 msgstr ""
 
 #: documents/templates/account/signup.html:5
-msgid "Paperless-ngx sign up"
+msgid "Newel-Docs sign up"
 msgstr ""
 
 #: documents/templates/account/signup.html:11
@@ -1397,7 +1397,7 @@ msgid "Sign up"
 msgstr ""
 
 #: documents/templates/index.html:61
-msgid "Paperless-ngx is loading..."
+msgid "Newel-Docs is loading..."
 msgstr ""
 
 #: documents/templates/index.html:62
@@ -1409,7 +1409,7 @@ msgid "Here's a link to the docs."
 msgstr ""
 
 #: documents/templates/mfa/authenticate.html:7
-msgid "Paperless-ngx Two-Factor Authentication"
+msgid "Newel-Docs Two-Factor Authentication"
 msgstr ""
 
 #: documents/templates/mfa/authenticate.html:12
@@ -1424,17 +1424,17 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: documents/templates/paperless-ngx/base.html:58
+#: documents/templates/Newel-Docs/base.html:58
 msgid "Share link was not found."
 msgstr ""
 
-#: documents/templates/paperless-ngx/base.html:62
+#: documents/templates/Newel-Docs/base.html:62
 msgid "Share link has expired."
 msgstr ""
 
 #: documents/templates/socialaccount/authentication_error.html:5
 #: documents/templates/socialaccount/login.html:5
-msgid "Paperless-ngx social account sign in"
+msgid "Newel-Docs social account sign in"
 msgstr ""
 
 #: documents/templates/socialaccount/authentication_error.html:10
@@ -1452,7 +1452,7 @@ msgid "Continue"
 msgstr ""
 
 #: documents/templates/socialaccount/signup.html:5
-msgid "Paperless-ngx social account sign up"
+msgid "Newel-Docs social account sign up"
 msgstr ""
 
 #: documents/templates/socialaccount/signup.html:10
@@ -1820,7 +1820,7 @@ msgid "Chinese Traditional"
 msgstr ""
 
 #: paperless/urls.py:370
-msgid "Paperless-ngx administration"
+msgid "Newel-Docs administration"
 msgstr ""
 
 #: paperless_mail/admin.py:39

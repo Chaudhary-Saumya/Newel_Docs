@@ -1,9 +1,17 @@
-import grp
 import os
-import pwd
+import sys
+
+if os.name != "nt":
+    import grp
+    import pwd
+else:
+    grp = None
+    pwd = None
+
 import shutil
 import stat
 from pathlib import Path
+
 
 from django.conf import settings
 from django.core.checks import Error

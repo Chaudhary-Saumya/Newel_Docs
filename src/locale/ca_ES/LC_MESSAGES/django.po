@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: paperless-ngx\n"
+"Project-Id-Version: Newel-Docs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-12 17:41+0000\n"
 "PO-Revision-Date: 2025-12-12 17:44\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: paperless-ngx\n"
+"X-Crowdin-Project: Newel-Docs\n"
 "X-Crowdin-Project-ID: 500308\n"
 "X-Crowdin-Language: ca\n"
 "X-Crowdin-File: /dev/src/locale/en_US/LC_MESSAGES/django.po\n"
@@ -1240,7 +1240,7 @@ msgid "Invalid variable detected."
 msgstr "Variable detectada invàlida."
 
 #: documents/templates/account/account_inactive.html:5
-msgid "Paperless-ngx account inactive"
+msgid "Newel-Docs account inactive"
 msgstr "Compte inactiu"
 
 #: documents/templates/account/account_inactive.html:9
@@ -1268,8 +1268,8 @@ msgstr "Gràcies per fer servir %(site_name)s!\n"
 "%(site_domain)s"
 
 #: documents/templates/account/login.html:5
-msgid "Paperless-ngx sign in"
-msgstr "Validació Paperless-ngx"
+msgid "Newel-Docs sign in"
+msgstr "Validació Newel-Docs"
 
 #: documents/templates/account/login.html:10
 msgid "Please sign in."
@@ -1306,7 +1306,7 @@ msgid "or sign in via"
 msgstr "o accedeix via"
 
 #: documents/templates/account/password_reset.html:5
-msgid "Paperless-ngx reset password request"
+msgid "Newel-Docs reset password request"
 msgstr "Sol·licitud de restabliment de la contrasenya"
 
 #: documents/templates/account/password_reset.html:9
@@ -1322,7 +1322,7 @@ msgid "Send me instructions!"
 msgstr "Enviar instruccions!"
 
 #: documents/templates/account/password_reset_done.html:5
-msgid "Paperless-ngx reset password sent"
+msgid "Newel-Docs reset password sent"
 msgstr "S'ha enviat el restabliment de contrasenya"
 
 #: documents/templates/account/password_reset_done.html:9
@@ -1334,8 +1334,8 @@ msgid "We've emailed you instructions for setting your password. You should rece
 msgstr "Us hem enviat per correu electrònic les instruccions per configurar la vostra contrasenya. Rebreu el correu electrònic en breu!"
 
 #: documents/templates/account/password_reset_from_key.html:5
-msgid "Paperless-ngx reset password confirmation"
-msgstr "Paperless-ngx confirmació de restabliment de contrasenya"
+msgid "Newel-Docs reset password confirmation"
+msgstr "Newel-Docs confirmació de restabliment de contrasenya"
 
 #: documents/templates/account/password_reset_from_key.html:9
 msgid "Set a new password."
@@ -1358,7 +1358,7 @@ msgid "Change my password"
 msgstr "Canvia contrasenya"
 
 #: documents/templates/account/password_reset_from_key_done.html:5
-msgid "Paperless-ngx reset password complete"
+msgid "Newel-Docs reset password complete"
 msgstr "Contrasenya restablerta"
 
 #: documents/templates/account/password_reset_from_key_done.html:9
@@ -1371,8 +1371,8 @@ msgid "Your new password has been set. You can now <a href=\"%(login_url)s\">log
 msgstr "Contrasenya enviada. Pots iniciar <a href=\"%(login_url)s\">sessió</a>"
 
 #: documents/templates/account/signup.html:5
-msgid "Paperless-ngx sign up"
-msgstr "Registra't a Paperless-ngx"
+msgid "Newel-Docs sign up"
+msgstr "Registra't a Newel-Docs"
 
 #: documents/templates/account/signup.html:11
 #, python-format
@@ -1398,8 +1398,8 @@ msgid "Sign up"
 msgstr "Registra't"
 
 #: documents/templates/index.html:61
-msgid "Paperless-ngx is loading..."
-msgstr "Paperless-ngx carregant..."
+msgid "Newel-Docs is loading..."
+msgstr "Newel-Docs carregant..."
 
 #: documents/templates/index.html:62
 msgid "Still here?! Hmm, something might be wrong."
@@ -1410,8 +1410,8 @@ msgid "Here's a link to the docs."
 msgstr "Aquí teniu un enllaç a la documentació."
 
 #: documents/templates/mfa/authenticate.html:7
-msgid "Paperless-ngx Two-Factor Authentication"
-msgstr "Doble Factor d'Autentificació de Paperless-ngx"
+msgid "Newel-Docs Two-Factor Authentication"
+msgstr "Doble Factor d'Autentificació de Newel-Docs"
 
 #: documents/templates/mfa/authenticate.html:12
 msgid "Your account is protected by two-factor authentication. Please enter an authenticator code:"
@@ -1425,18 +1425,18 @@ msgstr "Codi"
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: documents/templates/paperless-ngx/base.html:58
+#: documents/templates/Newel-Docs/base.html:58
 msgid "Share link was not found."
 msgstr "No s'ha trobat aquest enllaç."
 
-#: documents/templates/paperless-ngx/base.html:62
+#: documents/templates/Newel-Docs/base.html:62
 msgid "Share link has expired."
 msgstr "L'enllaç ha caducat."
 
 #: documents/templates/socialaccount/authentication_error.html:5
 #: documents/templates/socialaccount/login.html:5
-msgid "Paperless-ngx social account sign in"
-msgstr "Paperless-ngx accés a través de compte social"
+msgid "Newel-Docs social account sign in"
+msgstr "Newel-Docs accés a través de compte social"
 
 #: documents/templates/socialaccount/authentication_error.html:10
 #, python-format
@@ -1453,8 +1453,8 @@ msgid "Continue"
 msgstr "Continuar"
 
 #: documents/templates/socialaccount/signup.html:5
-msgid "Paperless-ngx social account sign up"
-msgstr "Inscripció amb comptes socials a Paperless-ngx"
+msgid "Newel-Docs social account sign up"
+msgstr "Inscripció amb comptes socials a Newel-Docs"
 
 #: documents/templates/socialaccount/signup.html:10
 #, python-format
@@ -1821,8 +1821,8 @@ msgid "Chinese Traditional"
 msgstr "Xinès tradicional"
 
 #: paperless/urls.py:370
-msgid "Paperless-ngx administration"
-msgstr "Administració Paperless-ngx"
+msgid "Newel-Docs administration"
+msgstr "Administració Newel-Docs"
 
 #: paperless_mail/admin.py:39
 msgid "Authentication"

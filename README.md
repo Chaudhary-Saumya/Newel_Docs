@@ -15,7 +15,7 @@
 
 <!-- omit in toc -->
 
-# Paperless-ngx
+# Newel Docs
 
 Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, _less paper_.
 
@@ -71,7 +71,7 @@ Migrating from Paperless-ng is easy, just drop in the new docker image! See the 
 
 ### Documentation
 
-The documentation for Paperless-ngx is available at [https://docs.paperless-ngx.com](https://docs.paperless-ngx.com/).
+The documentation for Newel Docs is available at [https://docs.paperless-ngx.com](https://docs.paperless-ngx.com/).
 
 # Contributing
 
@@ -83,7 +83,7 @@ People interested in continuing the work on paperless-ngx are encouraged to reac
 
 ## Translation
 
-Paperless-ngx is available in many languages that are coordinated on Crowdin. If you want to help out by translating paperless-ngx into your language, please head over to https://crowdin.com/project/paperless-ngx, and thank you! More details can be found in [CONTRIBUTING.md](https://github.com/paperless-ngx/paperless-ngx/blob/main/CONTRIBUTING.md#translating-paperless-ngx).
+Newel Docs is available in many languages that are coordinated on Crowdin. If you want to help out by translating Newel Docs into your language, please head over to https://crowdin.com/project/paperless-ngx, and thank you! More details can be found in [CONTRIBUTING.md](https://github.com/paperless-ngx/paperless-ngx/blob/main/CONTRIBUTING.md#translating-paperless-ngx).
 
 ## Feature Requests
 

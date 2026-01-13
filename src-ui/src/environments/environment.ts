@@ -4,15 +4,21 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8000/api/',
+
+  // MUST be relative so Angular proxy is used
+  apiBaseUrl: '/api/',
   apiVersion: '9',
-  appTitle: 'Paperless-ngx',
+
+  appTitle: 'Newel Docs',
   tag: 'dev',
   version: 'DEVELOPMENT',
-  webSocketHost: 'localhost:8000',
-  webSocketProtocol: 'ws:',
+
+  // WebSocket MUST also go through proxy
+  webSocketProtocol: '',
+  webSocketHost: '',
   webSocketBaseUrl: '/ws/',
-}
+};
+
 
 /*
  * For easier debugging in development mode, you can import the following file

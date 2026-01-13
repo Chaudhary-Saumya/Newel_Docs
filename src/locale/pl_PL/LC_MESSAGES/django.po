@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: paperless-ngx\n"
+"Project-Id-Version: Newel-Docs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-12 17:41+0000\n"
 "PO-Revision-Date: 2025-12-12 17:44\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Crowdin-Project: paperless-ngx\n"
+"X-Crowdin-Project: Newel-Docs\n"
 "X-Crowdin-Project-ID: 500308\n"
 "X-Crowdin-Language: pl\n"
 "X-Crowdin-File: /dev/src/locale/en_US/LC_MESSAGES/django.po\n"
@@ -1240,8 +1240,8 @@ msgid "Invalid variable detected."
 msgstr "Wykryto nieprawidłową zmienną."
 
 #: documents/templates/account/account_inactive.html:5
-msgid "Paperless-ngx account inactive"
-msgstr "Konto Paperless-ngx nieaktywne"
+msgid "Newel-Docs account inactive"
+msgstr "Konto Newel-Docs nieaktywne"
 
 #: documents/templates/account/account_inactive.html:9
 msgid "Account inactive."
@@ -1268,8 +1268,8 @@ msgstr "Dziękujemy za korzystanie z %(site_name)s\n"
 "%(site_domain)s"
 
 #: documents/templates/account/login.html:5
-msgid "Paperless-ngx sign in"
-msgstr "Logowanie do Paperless-ngx"
+msgid "Newel-Docs sign in"
+msgstr "Logowanie do Newel-Docs"
 
 #: documents/templates/account/login.html:10
 msgid "Please sign in."
@@ -1306,8 +1306,8 @@ msgid "or sign in via"
 msgstr "lub zaloguj się przez"
 
 #: documents/templates/account/password_reset.html:5
-msgid "Paperless-ngx reset password request"
-msgstr "Paperless-ngx prośba o reset hasła"
+msgid "Newel-Docs reset password request"
+msgstr "Newel-Docs prośba o reset hasła"
 
 #: documents/templates/account/password_reset.html:9
 msgid "Enter your email address below, and we'll email instructions for setting a new one."
@@ -1322,8 +1322,8 @@ msgid "Send me instructions!"
 msgstr "Wyślij mi instrukcje!"
 
 #: documents/templates/account/password_reset_done.html:5
-msgid "Paperless-ngx reset password sent"
-msgstr "Wysłano żądanie resetu hasła w aplikacji Paperless-ngx"
+msgid "Newel-Docs reset password sent"
+msgstr "Wysłano żądanie resetu hasła w aplikacji Newel-Docs"
 
 #: documents/templates/account/password_reset_done.html:9
 msgid "Check your inbox."
@@ -1334,8 +1334,8 @@ msgid "We've emailed you instructions for setting your password. You should rece
 msgstr "Wysłaliśmy Ci instrukcje dotyczące ustawienia hasła. Wkrótce otrzymasz e-mail!"
 
 #: documents/templates/account/password_reset_from_key.html:5
-msgid "Paperless-ngx reset password confirmation"
-msgstr "Potwierdzenie resetowania hasła w aplikacji Paperless-ngx"
+msgid "Newel-Docs reset password confirmation"
+msgstr "Potwierdzenie resetowania hasła w aplikacji Newel-Docs"
 
 #: documents/templates/account/password_reset_from_key.html:9
 msgid "Set a new password."
@@ -1358,8 +1358,8 @@ msgid "Change my password"
 msgstr "Zmień hasło"
 
 #: documents/templates/account/password_reset_from_key_done.html:5
-msgid "Paperless-ngx reset password complete"
-msgstr "Paperless-ngx zakończył resetowanie hasła"
+msgid "Newel-Docs reset password complete"
+msgstr "Newel-Docs zakończył resetowanie hasła"
 
 #: documents/templates/account/password_reset_from_key_done.html:9
 msgid "Password reset complete."
@@ -1371,8 +1371,8 @@ msgid "Your new password has been set. You can now <a href=\"%(login_url)s\">log
 msgstr "Twoje nowe hasło zostało ustawione. Możesz się teraz <a href=\"%(login_url)s\">zalogować</a>"
 
 #: documents/templates/account/signup.html:5
-msgid "Paperless-ngx sign up"
-msgstr "Rejestracja w Paperless-ngx"
+msgid "Newel-Docs sign up"
+msgstr "Rejestracja w Newel-Docs"
 
 #: documents/templates/account/signup.html:11
 #, python-format
@@ -1398,8 +1398,8 @@ msgid "Sign up"
 msgstr "Zarejestruj się"
 
 #: documents/templates/index.html:61
-msgid "Paperless-ngx is loading..."
-msgstr "Wczytywanie Paperless-ngx..."
+msgid "Newel-Docs is loading..."
+msgstr "Wczytywanie Newel-Docs..."
 
 #: documents/templates/index.html:62
 msgid "Still here?! Hmm, something might be wrong."
@@ -1410,8 +1410,8 @@ msgid "Here's a link to the docs."
 msgstr "Oto link do dokumentacji."
 
 #: documents/templates/mfa/authenticate.html:7
-msgid "Paperless-ngx Two-Factor Authentication"
-msgstr "Uwierzytelnianie dwuskładnikowe Paperless-ngx"
+msgid "Newel-Docs Two-Factor Authentication"
+msgstr "Uwierzytelnianie dwuskładnikowe Newel-Docs"
 
 #: documents/templates/mfa/authenticate.html:12
 msgid "Your account is protected by two-factor authentication. Please enter an authenticator code:"
@@ -1425,18 +1425,18 @@ msgstr "Kod"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: documents/templates/paperless-ngx/base.html:58
+#: documents/templates/Newel-Docs/base.html:58
 msgid "Share link was not found."
 msgstr "Link nie został odnaleziony."
 
-#: documents/templates/paperless-ngx/base.html:62
+#: documents/templates/Newel-Docs/base.html:62
 msgid "Share link has expired."
 msgstr "Link utracił ważność."
 
 #: documents/templates/socialaccount/authentication_error.html:5
 #: documents/templates/socialaccount/login.html:5
-msgid "Paperless-ngx social account sign in"
-msgstr "Logowanie do Paperless-ngx poprzez konto społecznościowe"
+msgid "Newel-Docs social account sign in"
+msgstr "Logowanie do Newel-Docs poprzez konto społecznościowe"
 
 #: documents/templates/socialaccount/authentication_error.html:10
 #, python-format
@@ -1453,8 +1453,8 @@ msgid "Continue"
 msgstr "Kontynuuj"
 
 #: documents/templates/socialaccount/signup.html:5
-msgid "Paperless-ngx social account sign up"
-msgstr "Zarejestruj w Paperless-ngx konto społecznościowe"
+msgid "Newel-Docs social account sign up"
+msgstr "Zarejestruj w Newel-Docs konto społecznościowe"
 
 #: documents/templates/socialaccount/signup.html:10
 #, python-format
@@ -1821,8 +1821,8 @@ msgid "Chinese Traditional"
 msgstr "chiński tradycyjny"
 
 #: paperless/urls.py:370
-msgid "Paperless-ngx administration"
-msgstr "Administracja Paperless-ngx"
+msgid "Newel-Docs administration"
+msgstr "Administracja Newel-Docs"
 
 #: paperless_mail/admin.py:39
 msgid "Authentication"

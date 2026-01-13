@@ -135,10 +135,11 @@
           },
           "defaultConfiguration": ""
         },
-        "serve": {
+       "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "buildTarget": "paperless-ui:build:en-US"
+            "buildTarget": "paperless-ui:build:en-US",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

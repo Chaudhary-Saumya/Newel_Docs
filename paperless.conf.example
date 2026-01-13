@@ -3,6 +3,14 @@
 
 # Required services
 
+# ===============================
+# LOCAL DEVELOPMENT (IMPORTANT)
+# ===============================
+
+PAPERLESS_URL=http://127.0.0.1:8000
+PAPERLESS_ALLOWED_HOSTS=127.0.0.1,localhost
+PAPERLESS_CORS_ALLOWED_HOSTS=http://127.0.0.1:8000
+
 #PAPERLESS_REDIS=redis://localhost:6379
 #PAPERLESS_DBHOST=localhost
 #PAPERLESS_DBPORT=5432

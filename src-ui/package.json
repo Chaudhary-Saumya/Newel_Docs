@@ -1,10 +1,10 @@
 {
-  "name": "paperless-ngx-ui",
+  "name": "newel-docs-ui",
   "version": "2.20.3",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test --no-watch --coverage",
     "lint": "ng lint"

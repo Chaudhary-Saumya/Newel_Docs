@@ -1,7 +1,11 @@
 from allauth.account import views as allauth_account_views
-from allauth.mfa.base import views as allauth_mfa_views
 from allauth.socialaccount import views as allauth_social_account_views
 from allauth.urls import build_provider_urlpatterns
+from django.apps import apps
+
+# Conditionally import MFA views if allauth.mfa is installed
+if apps.is_installed("allauth.mfa"):
+    from allauth.mfa.base import views as allauth_mfa_views
 from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
@@ -341,10 +345,16 @@ urlpatterns = [
                 ),
                 *build_provider_urlpatterns(),
                 # mfa, see allauth/mfa/base/urls.py
-                path(
-                    "2fa/authenticate/",
-                    allauth_mfa_views.authenticate,
-                    name="mfa_authenticate",
+                *(
+                    [
+                        path(
+                            "2fa/authenticate/",
+                            allauth_mfa_views.authenticate,
+                            name="mfa_authenticate",
+                        ),
+                    ]
+                    if apps.is_installed("allauth.mfa")
+                    else []
                 ),
             ],
         ),
@@ -363,8 +373,8 @@ websocket_urlpatterns = [
 ]
 
 # Text in each page's <h1> (and above login form).
-admin.site.site_header = "Paperless-ngx"
+admin.site.site_header = "Newel Docs"
 # Text at the end of each page's <title>.
-admin.site.site_title = "Paperless-ngx"
+admin.site.site_title = "Newel Docs"
 # Text at the top of the admin index page.
-admin.site.index_title = _("Paperless-ngx administration")
+admin.site.index_title = _("Newel Docs administration")
