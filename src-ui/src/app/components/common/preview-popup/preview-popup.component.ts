@@ -114,6 +114,10 @@ export class PreviewPopupComponent implements OnDestroy {
     }
   }
 
+  onPreviewError(event: any) {
+    this.error = true
+  }
+
   onPageRendered() {
     // Only triggered by the pngx pdf viewer
     if (this.documentService.searchQuery) {
