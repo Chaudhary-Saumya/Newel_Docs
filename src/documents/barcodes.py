@@ -167,7 +167,7 @@ class BarcodePlugin(ConsumeTaskPlugin):
                         # Adding optional original_path for later uses in
                         # workflow matching
                         original_path=self.input_doc.original_file,
-                    ),
+                    ).to_dict(),
                     # All the same metadata
                     self.metadata,
                 )

@@ -138,9 +138,12 @@ def train_classifier(*, scheduled=True):
 @shared_task(bind=True)
 def consume_file(
     self: Task,
-    input_doc: ConsumableDocument,
+    input_doc_dict: dict,
     overrides: DocumentMetadataOverrides | None = None,
 ):
+    # Reconstruct ConsumableDocument from dict
+    input_doc = ConsumableDocument.from_dict(input_doc_dict)
+
     # Default no overrides
     if overrides is None:
         overrides = DocumentMetadataOverrides()
