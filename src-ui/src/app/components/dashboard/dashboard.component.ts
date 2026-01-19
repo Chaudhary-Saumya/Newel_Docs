@@ -28,7 +28,6 @@ import { WelcomeWidgetComponent } from './widgets/welcome-widget/welcome-widget.
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   imports: [
-    LogoComponent,
     PageHeaderComponent,
     SavedViewWidgetComponent,
     StatisticsWidgetComponent,
