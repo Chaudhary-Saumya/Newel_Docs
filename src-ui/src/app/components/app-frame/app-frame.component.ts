@@ -299,6 +299,8 @@ export class AppFrameComponent
     this.openDocumentsService.closeAll()
   }
 
+
+
   get showSidebarCounts(): boolean {
     return (
       this.settingsService.get(SETTINGS_KEYS.SIDEBAR_VIEWS_SHOW_COUNT) &&

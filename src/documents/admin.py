@@ -21,12 +21,10 @@ if settings.AUDIT_LOG_ENABLED:
     from auditlog.admin import LogEntryAdmin
     from auditlog.models import LogEntry
 
-
 class CorrespondentAdmin(GuardedModelAdmin):
     list_display = ("name", "match", "matching_algorithm")
     list_filter = ("matching_algorithm",)
     list_editable = ("match", "matching_algorithm")
-
 
 class TagAdmin(GuardedModelAdmin, TreeNodeModelAdmin):
     list_display = ("name", "color", "match", "matching_algorithm")

@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common'
+import { AsyncPipe, NgIf } from '@angular/common'
 import {
   AfterViewInit,
   Component,
@@ -47,6 +47,7 @@ import { LoadingComponentWithPermissions } from '../../loading-component/loading
     TagComponent,
     CustomFieldDisplayComponent,
     AsyncPipe,
+    NgIf,
     UsernamePipe,
     CorrespondentNamePipe,
     DocumentTypeNamePipe,
@@ -84,7 +85,7 @@ export class DocumentCardLargeComponent
   @Input()
   document: Document
 
-  @Output()
+  thumbError = false
   dblClickDocument = new EventEmitter()
 
   @Output()
@@ -166,5 +167,10 @@ export class DocumentCardLargeComponent
 
   get notesEnabled(): boolean {
     return this.settingsService.get(SETTINGS_KEYS.NOTES_ENABLED)
+  }
+
+  onThumbError(event: any) {
+    this.thumbError = true
+    event.target.style.display = 'none'
   }
 }

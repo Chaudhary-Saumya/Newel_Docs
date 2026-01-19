@@ -164,12 +164,13 @@ export class DocumentService extends AbstractPaperlessService<Document> {
   }
 
   getPreviewUrl(id: number, original: boolean = false): string {
-    let url = new URL(this.getResourceUrl(id, 'preview'))
-    if (this._searchQuery) url.hash = `#search="${this.searchQuery}"`
+    let url = this.getResourceUrl(id, 'preview')
+    const urlObj = new URL(url, window.location.origin)
+    if (this._searchQuery) urlObj.hash = `#search="${this.searchQuery}"`
     if (original) {
-      url.searchParams.append('original', 'true')
+      urlObj.searchParams.append('original', 'true')
     }
-    return url.toString()
+    return urlObj.toString()
   }
 
   getThumbUrl(id: number): string {

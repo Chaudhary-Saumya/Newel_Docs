@@ -177,3 +177,29 @@ class ConsumableDocument:
         # Get the file type once at init
         # Note this function isn't called when the object is unpickled
         self.mime_type = magic.from_file(self.original_file, mime=True)
+
+    def to_dict(self) -> dict:
+        """
+        Convert the ConsumableDocument to a dictionary for JSON serialization.
+        """
+        return {
+            "source": self.source.value,  # Enum to int
+            "original_file": str(self.original_file),
+            "original_path": str(self.original_path) if self.original_path else None,
+            "mailrule_id": self.mailrule_id,
+            "mime_type": self.mime_type,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "ConsumableDocument":
+        """
+        Create a ConsumableDocument from a dictionary (after JSON deserialization).
+        """
+        # Create instance without calling __post_init__
+        obj = cls.__new__(cls)
+        obj.source = DocumentSource(data["source"])
+        obj.original_file = Path(data["original_file"])
+        obj.original_path = Path(data["original_path"]) if data["original_path"] else None
+        obj.mailrule_id = data["mailrule_id"]
+        obj.mime_type = data["mime_type"]
+        return obj

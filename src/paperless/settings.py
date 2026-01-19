@@ -310,33 +310,43 @@ env_apps = __get_list("PAPERLESS_APPS")
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
+
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "corsheaders",
     "django_extensions",
+
+    "django_celery_results",
+    "django_celery_beat",
+
     "paperless",
     "documents.apps.DocumentsConfig",
     "paperless_tesseract.apps.PaperlessTesseractConfig",
     "paperless_text.apps.PaperlessTextConfig",
     "paperless_mail.apps.PaperlessMailConfig",
-    "django.contrib.admin",
+
     "rest_framework",
     "rest_framework.authtoken",
     "django_filters",
-    "django_celery_results",
     "guardian",
+
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.mfa",
+
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "treenode",
+
     *env_apps,
 ]
+
 
 if DEBUG:
     INSTALLED_APPS.append("channels")
@@ -685,7 +695,7 @@ EMAIL_CERTIFICATE_FILE = __get_optional_path("PAPERLESS_EMAIL_CERTIFICATE_LOCATI
 # Database                                                                    #
 ###############################################################################
 def _parse_db_settings() -> dict:
-    DATABASES = {
+    databases = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.environ.get(
@@ -906,32 +916,29 @@ logging.config.dictConfig(LOGGING)
 
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html
 
+# =========================
+# CELERY (PAPERLESS SAFE)
+# =========================
+
+
 CELERY_BROKER_URL = _CELERY_REDIS_URL
 CELERY_TIMEZONE = TIME_ZONE
 
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
-CELERY_WORKER_CONCURRENCY: Final[int] = __get_int("PAPERLESS_TASK_WORKERS", 1)
-TASK_WORKERS = CELERY_WORKER_CONCURRENCY
+CELERY_WORKER_CONCURRENCY = __get_int("PAPERLESS_TASK_WORKERS", 1)
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 1
-CELERY_WORKER_SEND_TASK_EVENTS = True
-CELERY_TASK_SEND_SENT_EVENT = True
-CELERY_SEND_TASK_SENT_EVENT = True
-CELERY_BROKER_CONNECTION_RETRY = True
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_BROKER_TRANSPORT_OPTIONS = {
-    "global_keyprefix": _REDIS_KEY_PREFIX,
-}
 
 CELERY_TASK_TRACK_STARTED = False
 
-CELERY_IGNORE_RESULT = True
-CELERY_TASK_IGNORE_RESULT = True
-
-CELERY_RESULT_BACKEND = None
-CELERY_RESULT_EXTENDED = False
-
+# 🔥 REQUIRED
 CELERY_TASK_SERIALIZER = "pickle"
 CELERY_ACCEPT_CONTENT = ["pickle"]
+CELERY_RESULT_SERIALIZER = "pickle"
+
+CELERY_IGNORE_RESULT = False
+CELERY_TASK_IGNORE_RESULT = False
+
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
 
 
 

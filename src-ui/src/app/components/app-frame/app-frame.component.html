@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow-sm">
+<nav class="navbar navbar-light bg-white flex-md-nowrap p-0 shadow-sm border-bottom">
   <button class="navbar-toggler d-md-none collapsed border-0" type="button" data-toggle="collapse"
     data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
     (click)="isMenuCollapsed = !isMenuCollapsed">
@@ -7,7 +7,7 @@
   <a class="navbar-brand d-flex align-items-center me-0 px-3 py-3 order-sm-0"
     [ngClass]="{ 'slim': slimSidebarEnabled, 'col-auto col-md-3 col-lg-2 col-xxxl-1' : !slimSidebarEnabled, 'py-3' : !customAppTitle?.length || slimSidebarEnabled, 'py-2': customAppTitle?.length }"
     routerLink="/dashboard" tourAnchor="tour.intro">
-   
+
     <div class="ms-2 ms-md-3 d-inline-block" [class.d-md-none]="slimSidebarEnabled">
       @if (customAppTitle?.length) {
       <div class="d-flex flex-column align-items-start custom-title">
@@ -15,7 +15,7 @@
         <span class="byline text-uppercase font-monospace" i18n>by Newel-Docs</span>
       </div>
       } @else {
-      Newel-Docs
+      <img src="../../../logo.png" alt="Newel-Docs Logo" class="navbar-logo">
       }
     </div>
   </a>
