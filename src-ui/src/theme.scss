@@ -1,8 +1,339 @@
 @use "sass:color";
 @mixin paperless-green {
-  // base color e.g. #17541f = hsl(128, 57%, 21%)
-  --pngx-primary: 128, 57%;
-  --pngx-primary-lightness: 21%;
+  // Premium Indigo Theme
+  // base color hsl(226, 70%, 55%)
+  --pngx-primary: 226, 70%;
+  --pngx-primary-lightness: 55%;
+}
+
+:root {
+  @include paperless-green;
+  --pngx-primary-text-contrast: #fff;
+
+  --bs-primary: hsl(var(--pngx-primary), var(--pngx-primary-lightness));
+  --bs-border-color: var(--bs-gray-300); // Lighter border for modern feel
+  --pngx-primary-faded: hsl(var(--pngx-primary), 95%);
+  --pngx-primary-lighten-10: hsl(var(--pngx-primary), calc(var(--pngx-primary-lightness) + 10%));
+  --pngx-primary-lighten-30: hsl(var(--pngx-primary), calc(var(--pngx-primary-lightness) + 30%));
+  --pngx-primary-darken-5: hsl(var(--pngx-primary), calc(var(--pngx-primary-lightness) - 5%));
+  --pngx-primary-darken-15: hsl(var(--pngx-primary), calc(var(--pngx-primary-lightness) - 15%));
+  --pngx-primary-darken-18: hsl(var(--pngx-primary), calc(var(--pngx-primary-lightness) - 18%));
+  --pngx-primary-darken-27: hsl(var(--pngx-primary), calc(var(--pngx-primary-lightness) - 27%));
+  --pngx-success-darken-10: hsl(152, 69%, 30%); // brighter success
+  --pngx-bg-alt: #f8fafc; // Slate-50
+  --pngx-bg-darker: #f1f5f9; // Slate-100
+  --pngx-bg-alt2: #e2e8f0; // Slate-200
+  --pngx-bg-disabled: #f3f4f6;
+  --pngx-focus-alpha: 0.3;
+  --pngx-toast-max-width: 340px;
+  --bs-info: var(--pngx-bg-alt2);
+  --bs-info-rgb: 233, 236, 239;
+  
+  // Font override if requested, otherwise default system fonts
+  --bs-body-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+  @media screen and (min-width: 1024px) {
+    --pngx-toast-max-width: 450px;
+  }
+}
+
+// Dark text colors allow for maintain contrast with theme color changes
+$text-color-light-bg: #1e293b; // Slate-800
+$text-color-dark-bg: #e2e8f0; // Slate-200
+$text-color-dark-bg-accent: #f8fafc; // Slate-50
+
+// Taken from bootstrap
+$form-check-input-checked-bg-image-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$text-color-light-bg}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/></svg>");
+$form-check-radio-checked-bg-image-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$text-color-light-bg}'/></svg>");
+
+.primary-light {
+  --pngx-primary-text-contrast: #{$text-color-light-bg} !important;
+
+  .form-check:not(.form-switch) {
+    .form-check-input:checked[type=checkbox] {
+      background-image: escape-svg($form-check-input-checked-bg-image-dark);
+    }
+
+    .form-check-input:checked[type=radio] {
+      background-image: escape-svg($form-check-radio-checked-bg-image-dark);
+    }
+  }
+
+  .toast .btn-close {
+    filter: none !important;
+  }
+}
+
+.primary-dark {
+  --pngx-primary-text-contrast: #{$text-color-dark-bg} !important;
+}
+
+.text-primary-contrast {
+  color: var(--pngx-primary-text-contrast);
+}
+
+// Dark mode mixin
+@mixin paperless-green-dark-mode {
+  --pngx-primary-lightness: 60%;
+  --bs-primary: hsl(var(--pngx-primary),var(--pngx-primary-lightness));
+}
+
+@mixin dark-mode {
+  --pngx-body-color-accent: #{$text-color-dark-bg-accent};
+  // Modern Dark Theme (Slate)
+  --pngx-bg-alt: #1e293b; // Slate-800
+  --pngx-bg-alt2: #334155; // Slate-700
+  --pngx-bg-darker: #0f172a; // Slate-900
+  --pngx-bg-disabled: var(--pngx-bg-alt);
+  --pngx-focus-alpha: 0.6;
+  --pngx-primary-faded: rgba(var(--pngx-primary), 0.2);
+  --pngx-primary-text-contrast: #fff;
+  
+  --bs-body-color: #cbd5e1; // Slate-300
+  --bs-secondary-color: #94a3b8; // Slate-400
+  --bs-danger: #ef4444;
+  --bs-danger-rgb: 239, 68, 68;
+  --bs-body-bg: #020617; // Slate-950
+  --bs-body-bg-rgb: 2, 6, 23;
+  --bs-light: #1e293b;
+  --bs-light-rgb: 30, 41, 59;
+  --bs-info: var(--pngx-bg-alt);
+  --bs-info-rgb: 30, 41, 59;
+  --bs-border-color: #334155; // Slate-700
+  --bs-tertiary-bg: var(--pngx-bg-darker);
+  --bs-dark-border-subtle: var(--pngx-bg-darker);
+  --bs-border-color-translucent: rgba(255, 255, 255, .1); 
+
+  .text-dark, .text-light {
+    color: var(--bs-body-color) !important;
+  }
+
+  .btn {
+    --bs-btn-disabled-opacity: 0.35;
+  }
+  .btn.btn-link {
+    --bs-btn-disabled-opacity: 0.85;
+  }
+
+  .btn-primary {
+    color: #fff !important;
+    &:hover, &:focus, &.active, &:active {
+      color: #fff !important;
+    }
+  }
+
+  &.primary-light .btn-primary {
+    &:hover, &:focus, &.active, &:active {
+      color: var(--pngx-bg-darker) !important;
+    }
+  }
+
+  .btn-dark {
+    --bs-btn-color: $text-color-dark-bg;
+    --bs-btn-bg: var(--pngx-bg-alt);
+    --bs-btn-border-color: var(--pngx-bg-alt);
+    --bs-btn-hover-bg: var(--bs-light);
+    --bs-btn-hover-border-color: var(--pngx-bg-darker);
+    --bs-btn-active-bg: var(--pngx-bg-alt);
+  }
+
+  .btn-outline-primary {
+    &:hover, &:focus, &.active, &:active {
+      color: #fff !important;
+    }
+  }
+
+  .btn-outline-secondary {
+    border-color: var(--bs-border-color);
+    color: var(--bs-secondary-color);
+    &:hover, &:focus, &.active, &:active {
+      background-color: var(--pngx-bg-darker);
+      color: var(--pngx-body-color-accent) !important;
+      border-color: var(--bs-light);
+    }
+  }
+
+  .btn-light {
+    color: var(--bs-body-color);
+    background-color: var(--bs-light);
+    border-color: var(--bs-border-color);
+  }
+
+  .btn .progress {
+    background-color: var(--pngx-body-color-accent);
+  }
+
+  .search-container {
+    input, input:focus, i-bs[name="search"] , ::placeholder {
+      color: var(--bs-body-color) !important;
+    }
+  }
+
+  .card {
+    background-color: var(--bs-light);
+    border-color: var(--bs-border-color);
+    --bs-card-cap-bg: var(--bs-light-rgb);
+
+    .card-header {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-bottom-color: var(--bs-border-color);
+    }
+  }
+
+  .row-cols-paperless-cards .card, pngx-document-card-large .card {
+    --bs-border-color-translucent: rgba(0, 0, 0, .3);
+  }
+
+  .modal-content, .modal-header, .modal-body, .modal-footer {
+    background-color: var(--bs-light);
+    border-color: var(--bs-border-color);
+  }
+
+  app-tag .badge {
+    filter: brightness(.8);
+  }
+
+  .badge.bg-light.border {
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+
+  .badge.bg-body {
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  }
+
+  .document-card .card-body.bg-light {
+    background-color: var(--bs-light);
+  }
+
+  .doc-img {
+    mix-blend-mode: normal;
+    border-radius: 0;
+    border-color: var(--bs-border-color);
+    filter: invert(10%);
+    transform: translateZ(0); // fix for safari to force hw acceleration
+
+    &.border-end {
+      border-right: none !important;
+    }
+  }
+
+  .doc-img.inverted {
+    filter: invert(95%) hue-rotate(180deg);
+  }
+
+  .card-selected .doc-img {
+    mix-blend-mode: luminosity;
+  }
+
+  .paperless-input-select .ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:not(.ng-option-selected):hover,
+  .paperless-input-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: var(--pngx-bg-alt2) !important;
+  }
+
+  .ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    background-color: var(--pngx-bg-alt);
+    color: var(--bs-body-color);
+
+    .ng-value-icon.left {
+      border-color: var(--pngx-bg-alt);
+
+      &:hover {
+        background-color: var(--pngx-primary-lighten-30);
+      }
+    }
+  }
+
+  table {
+    .des,
+    .asc {
+      &::after {
+        filter: invert(0.8); /* arrow is a black inline png bkgd image (!) so use filter */
+      }
+    }
+
+    &.table-hover > tbody > tr:hover > * {
+      background-color: var(--pngx-bg-alt);
+      color: var(--pngx-body-color-accent);
+    }
+  }
+
+  .table-row-selected {
+    td, a:not(.badge) {
+      color: #fff !important;
+    }
+  }
+
+  .card .table {
+    border-color: var(--bs-border-color);
+  }
+
+  .alert-secondary {
+    background-color: var(--bs-light);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+  }
+
+  .alert-primary {
+    --bs-alert-color: #fff;
+    --bs-alert-bg: var(--pngx-primary-darken-18);
+    --bs-alert-border-color: var(--pngx-bg-darker);
+  }
+
+  .alert-success {
+    --bs-alert-color: #fff;
+    --bs-alert-bg: var(--pngx-success-darken-10);
+    --bs-alert-border-color: var(--pngx-bg-darker);
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) > * {
+    color: var(--pngx-body-color-accent);
+    background-color: rgba(255,255,255,0.03);
+  }
+
+  .close, .modal .btn-close, .alert .btn-close {
+    text-shadow: 0 1px 0 #000;
+  }
+
+  .modal .btn-close, .alert .btn-close, .toast .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+
+  .toast {
+    background-color: var(--bs-light);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+  }
+
+  .toast,
+  .toast .btn,
+  .toast .btn-close {
+    color: var(--bs-body-color);
+  }
+
+  .dropdown-item {
+    --bs-dropdown-color: var(--bs-body-color);
+    --pngx-bg-darker: var(--pngx-bg-alt);
+    &:hover, &:focus {
+        background-color: var(--pngx-bg-alt);
+    }
+  }
+
+  .list-group {
+    --bs-list-group-action-hover-color: var(--bs-secondary-color);
+  }
+
+  .card .list-group-item {
+    --bs-border-color: var(--bs-border-color);
+
+    .bg-secondary {
+      background-color: var(--bs-light) !important;
+    }
+  }
+
+  .tooltip {
+    --bs-tooltip-bg: var(--bs-light);
+    --bs-tooltip-color: var(--bs-body-color);
+  }
 }
 
 :root {

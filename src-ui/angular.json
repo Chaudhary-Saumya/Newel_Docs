@@ -73,6 +73,7 @@
             "assets": [
               "src/favicon.ico",
               "src/apple-touch-icon.png",
+              "src/logo.png",
               "src/assets",
               "src/manifest.webmanifest",
               {
