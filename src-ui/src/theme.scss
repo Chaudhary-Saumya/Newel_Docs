@@ -1,9 +1,15 @@
 @use "sass:color";
 @mixin paperless-green {
-  // Premium Indigo Theme
-  // base color hsl(226, 70%, 55%)
-  --pngx-primary: 226, 70%;
-  --pngx-primary-lightness: 55%;
+  // Corporate Blue Theme
+  // base color hsl(210, 100%, 50%) -> Blue
+  --pngx-primary: 210, 100%;
+  --pngx-primary-lightness: 50%;
+  
+  // Custom Sidebar Variables
+  --pngx-sidebar-bg: #1e3a8a; // Dark Blue
+  --pngx-sidebar-text: #f8fafc; // Off-white
+  --pngx-sidebar-active: #2563eb; // Brighter Blue
+  --pngx-content-bg: #f1f5f9; // Light Gray / Slate-100
 }
 
 :root {

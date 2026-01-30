@@ -799,3 +799,77 @@ canvas.hiddenCanvasElement {
     display: block;
   }
 }
+
+// -------------------------------------------------------------------------
+//  BLUE SIDEBAR OVERRIDES
+// -------------------------------------------------------------------------
+
+// Main Layout background
+body {
+  background-color: var(--pngx-content-bg, #f8f9fa);
+}
+
+// Sidebar container
+.sidebar {
+  background-color: var(--pngx-sidebar-bg, #fff) !important;
+  color: var(--pngx-sidebar-text, #333) !important;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+// Sidebar Links
+.sidebar .nav-link {
+  color: rgba(255,255,255,0.8) !important;
+  transition: all 0.2s ease-in-out;
+  border-radius: 6px;
+  margin-bottom: 2px;
+
+  &:hover {
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.1) !important;
+  }
+  
+  &.active {
+    background-color: var(--pngx-sidebar-active, #0d6efd) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+}
+
+// Sidebar headings
+.sidebar .sidebar-heading {
+  color: rgba(255,255,255,0.5) !important;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+// Sidebar icons
+.sidebar i-bs {
+  opacity: 0.9;
+}
+
+// Badges in sidebar
+.sidebar .badge {
+  background-color: rgba(255,255,255,0.2) !important;
+  color: #fff !important;
+}
+
+// Toggler button styling
+.sidebar-slim-toggler {
+  background-color: rgba(255,255,255,0.1) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  
+  &:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+  }
+}
+
+// Adjust Navbar to separate it visually
+.navbar {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  z-index: 1001; 
+}
+
+
