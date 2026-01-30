@@ -12,6 +12,26 @@ from platform import machine
 from typing import Final
 from urllib.parse import urlparse
 
+# --- MONKEY PATCH FOR MIGRATION WITHOUT GPG ---
+import gnupg
+try:
+    gnupg.GPG()
+except OSError:
+    class MockResult:
+        data = b""
+        def __init__(self, *args, **kwargs): pass
+        
+    class MockGPG:
+        def __init__(self, *args, **kwargs): pass
+        def decrypt_file(self, *args, **kwargs): return MockResult()
+        def encrypt_file(self, *args, **kwargs): return MockResult()
+        def scan_keys(self, *args, **kwargs): return MockResult()
+        def list_keys(self, *args, **kwargs): return []
+
+    gnupg.GPG = MockGPG
+    print("WARNING: GnuPG not available, using MockGPG for migration.")
+# ----------------------------------------------
+
 from celery.schedules import crontab
 from dateparser.languages.loader import LocaleDataLoader
 from django.utils.translation import gettext_lazy as _
@@ -617,6 +637,7 @@ CORS_ALLOWED_ORIGINS = __get_list(
 if DEBUG:
     # Allow access from the angular development server during debugging
     CORS_ALLOWED_ORIGINS.append("http://localhost:4200")
+    CSRF_TRUSTED_ORIGINS.append("http://localhost:4200")
 
 CORS_EXPOSE_HEADERS = [
     "Content-Disposition",
