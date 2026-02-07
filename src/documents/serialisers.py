@@ -1818,24 +1818,36 @@ class PostDocumentSerializer(serializers.Serializer):
     )
 
     def validate_document(self, document):
-        document_data = document.file.read()
-        mime_type = magic.from_buffer(document_data, mime=True)
+        try:
+            document_data = document.file.read()
+            # Ensure it is bytes for python-magic
+            try:
+                mime_type = magic.from_buffer(bytes(document_data), mime=True)
+            except Exception as e:
+                logger.warning(f"python-magic failed: {e}, falling back to mimetypes")
+                import mimetypes
+                mime_type, _ = mimetypes.guess_type(document.name)
+                if not mime_type:
+                    mime_type = "application/octet-stream"
 
-        if not is_mime_type_supported(mime_type):
-            if (
-                mime_type in settings.CONSUMER_PDF_RECOVERABLE_MIME_TYPES
-                and document.name.endswith(
-                    ".pdf",
-                )
-            ):
-                # If the file is an invalid PDF, we can try to recover it later in the consumer
-                mime_type = "application/pdf"
-            else:
-                raise serializers.ValidationError(
-                    _("File type %(type)s not supported") % {"type": mime_type},
-                )
+            if not is_mime_type_supported(mime_type):
+                if (
+                    mime_type in settings.CONSUMER_PDF_RECOVERABLE_MIME_TYPES
+                    and document.name.endswith(
+                        ".pdf",
+                    )
+                ):
+                    # If the file is an invalid PDF, we can try to recover it later in the consumer
+                    mime_type = "application/pdf"
+                else:
+                    raise serializers.ValidationError(
+                        _("File type %(type)s not supported") % {"type": mime_type},
+                    )
 
-        return document.name, document_data
+            return document.name, document_data
+        except Exception as e:
+            logger.error(f"Error in validate_document: {e}")
+            raise e
 
     def validate_correspondent(self, correspondent):
         if correspondent:

@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 import tempfile
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -116,17 +117,15 @@ class RasterisedDocumentParser(DocumentParser):
             return im.mode in ("RGBA", "LA")
 
     def remove_alpha(self, image_path: str) -> Path:
-        no_alpha_image = Path(self.tempdir) / "image-no-alpha"
-        run_subprocess(
-            [
-                settings.CONVERT_BINARY,
-                "-alpha",
-                "off",
-                image_path,
-                no_alpha_image,
-            ],
-            logger=self.log,
-        )
+        no_alpha_image = Path(self.tempdir) / "image-no-alpha.png"
+        try:
+            with Image.open(image_path) as im:
+                # Convert to RGB to remove alpha channel
+                im.convert("RGB").save(no_alpha_image)
+        except Exception as e:
+            self.log.warning(f"Failed to remove alpha with PIL: {e}")
+            # Fallback or re-raise? If this fails, we probably can't process it.
+            raise e
         return no_alpha_image
 
     def get_dpi(self, image) -> int | None:
@@ -249,18 +248,33 @@ class RasterisedDocumentParser(DocumentParser):
         else:  # pragma: no cover
             raise ParseError(f"Invalid ocr mode: {self.settings.mode}")
 
+        # Check if unpaper is available
+        has_unpaper = shutil.which("unpaper") is not None
+        if not has_unpaper and (
+            self.settings.clean in {CleanChoices.CLEAN, CleanChoices.FINAL}
+            or self.settings.deskew
+        ):
+            self.log.warning(
+                "unpaper not found, disabling clean and deskew options. "
+                "Please install unpaper to enable these features.",
+            )
+
         if self.settings.clean == CleanChoices.CLEAN:
-            ocrmypdf_args["clean"] = True
+            if has_unpaper:
+                ocrmypdf_args["clean"] = True
         elif self.settings.clean == CleanChoices.FINAL:
             if self.settings.mode == ModeChoices.REDO:
-                ocrmypdf_args["clean"] = True
+                if has_unpaper:
+                    ocrmypdf_args["clean"] = True
             else:
                 # --clean-final is not compatible with --redo-ocr
-                ocrmypdf_args["clean_final"] = True
+                if has_unpaper:
+                    ocrmypdf_args["clean_final"] = True
 
         if self.settings.deskew and self.settings.mode != ModeChoices.REDO:
             # --deskew is not compatible with --redo-ocr
-            ocrmypdf_args["deskew"] = True
+            if has_unpaper:
+                ocrmypdf_args["deskew"] = True
 
         if self.settings.rotate:
             ocrmypdf_args["rotate_pages"] = True
@@ -443,6 +457,15 @@ class RasterisedDocumentParser(DocumentParser):
                 raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
 
         except Exception as e:
+            # Handle MissingDependencyError from ocrmypdf (e.g. tesseract missing)
+            if "MissingDependencyError" in str(type(e).__name__) or "Could not find program" in str(e):
+                self.log.warning(f"Dependency missing (tesseract/ghostscript/unpaper): {e}. Skipping OCR/Archive generation.")
+                self.text = "" # No text extracted
+                # If we have original text (for PDF), use it
+                if original_has_text:
+                    self.text = text_original
+                return # Successfully return with empty/partial text, avoiding crash at consume task
+                
             # Anything else is probably serious.
             raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
 

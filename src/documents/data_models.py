@@ -176,7 +176,13 @@ class ConsumableDocument:
 
         # Get the file type once at init
         # Note this function isn't called when the object is unpickled
-        self.mime_type = magic.from_file(self.original_file, mime=True)
+        try:
+            self.mime_type = magic.from_file(str(self.original_file), mime=True)
+        except Exception:
+            import mimetypes
+            self.mime_type, _ = mimetypes.guess_type(self.original_file)
+            if not self.mime_type:
+                self.mime_type = "application/octet-stream"
 
     def to_dict(self) -> dict:
         """

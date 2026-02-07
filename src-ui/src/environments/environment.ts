@@ -14,8 +14,8 @@ export const environment = {
   version: 'DEVELOPMENT',
 
   // WebSocket MUST also go through proxy
-  webSocketProtocol: '',
-  webSocketHost: '',
+  webSocketProtocol: 'ws:',
+  webSocketHost: 'localhost:8000',
   webSocketBaseUrl: '/ws/',
 };
 

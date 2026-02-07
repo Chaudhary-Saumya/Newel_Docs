@@ -142,7 +142,10 @@ def consume_file(
     overrides: DocumentMetadataOverrides | None = None,
 ):
     # Reconstruct ConsumableDocument from dict
-    input_doc = ConsumableDocument.from_dict(input_doc_dict)
+    if isinstance(input_doc_dict, ConsumableDocument):
+        input_doc = input_doc_dict
+    else:
+        input_doc = ConsumableDocument.from_dict(input_doc_dict)
 
     # Default no overrides
     if overrides is None:
