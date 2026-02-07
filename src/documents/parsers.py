@@ -207,6 +207,10 @@ def make_thumbnail_from_pdf_gs_fallback(in_path, temp_dir, logging_group=None) -
             run_subprocess(cmd, logger=logger)
         except subprocess.CalledProcessError as e:
             raise ParseError(f"Thumbnail (gs) failed at {cmd}") from e
+        except (FileNotFoundError, OSError) as e:
+             # Ghostscript binary not found
+             raise ParseError(f"Ghostscript not found: {e}") from e
+
         # then run convert on the output from gs to make WebP
         run_convert(
             density=300,

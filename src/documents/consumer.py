@@ -299,8 +299,14 @@ class ConsumerPlugin(
             self.unmodified_original = None
 
             # Determine the parser class.
-
-            mime_type = magic.from_file(self.working_copy, mime=True)
+            try:
+                mime_type = magic.from_file(str(self.working_copy), mime=True)
+            except Exception as e:
+                self.log.warning(f"python-magic failed to detect type for {self.working_copy}: {e}, falling back to mimetypes")
+                import mimetypes
+                mime_type, _ = mimetypes.guess_type(self.filename)
+                if not mime_type:
+                    mime_type = "application/octet-stream"
 
             self.log.debug(f"Detected mime type: {mime_type}")
 
@@ -322,7 +328,13 @@ class ConsumerPlugin(
                         ],
                         logger=self.log,
                     )
-                    mime_type = magic.from_file(self.working_copy, mime=True)
+                    try:
+                        mime_type = magic.from_file(str(self.working_copy), mime=True)
+                    except Exception as e:
+                         self.log.warning(f"python-magic failed (post-qpdf): {e}")
+                         # Keep previous mime_type or guess again?
+                         # Usually if qpdf runs it's a PDF, so let's trust extension if it failed
+                         mime_type = "application/pdf"
                     self.log.debug(f"Detected mime type after qpdf: {mime_type}")
                     # Save the original file for later
                     self.unmodified_original = (
