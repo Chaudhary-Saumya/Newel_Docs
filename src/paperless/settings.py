@@ -32,6 +32,11 @@ except OSError:
     print("WARNING: GnuPG not available, using MockGPG for migration.")
 # ----------------------------------------------
 
+# --- MONKEY PATCH FOR POSTGRESQL VERSION CHECK ---
+from django.db.backends.postgresql.base import DatabaseWrapper
+DatabaseWrapper.check_database_version_supported = lambda self: None
+# -----------------------------------------------
+
 from celery.schedules import crontab
 from dateparser.languages.loader import LocaleDataLoader
 from django.utils.translation import gettext_lazy as _
@@ -453,9 +458,9 @@ ASGI_APPLICATION = "paperless.asgi.application"
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "src-ui" / "dist" / "paperless-ui",
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "src-ui" / "dist" / "paperless-ui",
+# ]
 
 
 WHITENOISE_STATIC_PREFIX = "/static/"
@@ -634,10 +639,24 @@ CORS_ALLOWED_ORIGINS = __get_list(
     ["http://localhost:8000"],
 )
 
+# --- MONKEY PATCH FOR POSTGRESQL VERSION CHECK ---
+from django.db.backends.postgresql.base import DatabaseWrapper as PGDatabaseWrapper
+from django.db.backends.base.base import BaseDatabaseWrapper
+PGDatabaseWrapper.check_database_version_supported = lambda self: None
+BaseDatabaseWrapper.check_database_version_supported = lambda self: None
+# -----------------------------------------------
+
 if DEBUG:
     # Allow access from the angular development server during debugging
     CORS_ALLOWED_ORIGINS.append("http://localhost:4200")
+    CORS_ALLOWED_ORIGINS.append("http://127.0.0.1:4200")
     CSRF_TRUSTED_ORIGINS.append("http://localhost:4200")
+    CSRF_TRUSTED_ORIGINS.append("http://127.0.0.1:4200")
+    CORS_ALLOW_CREDENTIALS = True
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_HTTPONLY = False  # Allow JS to read the cookie
+    SESSION_COOKIE_HTTPONLY = False # Debugging only
 
 CORS_EXPOSE_HEADERS = [
     "Content-Disposition",
