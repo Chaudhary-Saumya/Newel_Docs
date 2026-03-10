@@ -1,10 +1,15 @@
 body {
-  --bs-body-bg: #f5f5f5;
-  --bs-link-color-rgb: 23, 84, 31; /* #17541f */
-  --bs-link-hover-color-rgb: 15, 56, 20;
-  --pngx-primary: #17541f;
-  --pngx-primary-hover: #0f3614;
-  --pngx-primary-active: #0c2c10;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  --bs-link-color-rgb: 0, 86, 179; /* #0056b3 */
+  --bs-link-hover-color-rgb: 0, 64, 133;
+  --pngx-primary: #0056b3;
+  --pngx-primary-hover: #004494;
+  --pngx-primary-active: #003370;
 }
 
 .logo {
@@ -20,8 +25,15 @@ body {
   color: var(--pngx-primary) !important;
 }
 
+.main-container {
+  padding: 1rem;
+}
+
 .form-control {
   --bs-body-bg: #fff;
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
 }
 
 .btn.btn-primary {
@@ -31,17 +43,36 @@ body {
   --bs-btn-hover-border-color: #0c2c10;
   --bs-btn-active-bg: var(--pngx-primary-active);
   --bs-btn-active-border-color: #09220d;
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 86, 179, 0.25);
 }
 
 .btn-link {
   --bs-btn-color: var(--pngx-primary);
   --bs-btn-hover-color: var(--pngx-primary-hover);
   --bs-btn-active-color: var(--pngx-primary-active);
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 .form-accounts {
-  max-width: 330px;
-  min-width: 300px;
+  max-width: 400px;
+  min-width: 320px;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.form-floating > label {
+  padding-left: 1rem;
 }
 
 .form-stacked-top input {

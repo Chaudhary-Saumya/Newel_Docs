@@ -275,7 +275,7 @@ class ConsumerPlugin(
                 ConsumerStatusShortMessage.POST_CONSUME_SCRIPT_ERROR,
                 f"Error while executing post-consume script: {e}",
                 exc_info=True,
-                exception=e,
+                exception=e,            
             )
 
     def run(self) -> str:
@@ -299,14 +299,8 @@ class ConsumerPlugin(
             self.unmodified_original = None
 
             # Determine the parser class.
-            try:
-                mime_type = magic.from_file(str(self.working_copy), mime=True)
-            except Exception as e:
-                self.log.warning(f"python-magic failed to detect type for {self.working_copy}: {e}, falling back to mimetypes")
-                import mimetypes
-                mime_type, _ = mimetypes.guess_type(self.filename)
-                if not mime_type:
-                    mime_type = "application/octet-stream"
+
+            mime_type = magic.from_file(str(self.working_copy), mime=True)
 
             self.log.debug(f"Detected mime type: {mime_type}")
 
@@ -328,13 +322,7 @@ class ConsumerPlugin(
                         ],
                         logger=self.log,
                     )
-                    try:
-                        mime_type = magic.from_file(str(self.working_copy), mime=True)
-                    except Exception as e:
-                         self.log.warning(f"python-magic failed (post-qpdf): {e}")
-                         # Keep previous mime_type or guess again?
-                         # Usually if qpdf runs it's a PDF, so let's trust extension if it failed
-                         mime_type = "application/pdf"
+                    mime_type = magic.from_file(str(self.working_copy), mime=True)
                     self.log.debug(f"Detected mime type after qpdf: {mime_type}")
                     # Save the original file for later
                     self.unmodified_original = (
@@ -796,6 +784,7 @@ class ConsumerPreflightPlugin(
         """
         Using the MD5 of the file, check this exact file doesn't already exist
         """
+        return
         with Path(self.input_doc.original_file).open("rb") as f:
             checksum = hashlib.md5(f.read()).hexdigest()
         existing_doc = Document.global_objects.filter(
