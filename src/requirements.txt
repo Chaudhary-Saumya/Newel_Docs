@@ -52,3 +52,4 @@ watchdog~=6.0
 whitenoise~=6.9
 whoosh-reloaded>=2.7.5
 zxing-cpp~=2.3.0
+psycopg2-binary

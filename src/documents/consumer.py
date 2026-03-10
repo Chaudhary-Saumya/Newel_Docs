@@ -712,9 +712,14 @@ class ConsumerPlugin(
             document.archive_serial_number = self.metadata.asn
 
         if self.metadata.owner_id:
-            document.owner = User.objects.get(
-                pk=self.metadata.owner_id,
-            )
+            try:
+                document.owner = User.objects.get(pk=self.metadata.owner_id)
+            except User.DoesNotExist:
+                logger.warning(
+                    f"User with id {self.metadata.owner_id} not found, "
+                    "falling back to default owner."
+                )
+                document.owner = User.objects.first()
 
         if (
             self.metadata.view_users is not None
