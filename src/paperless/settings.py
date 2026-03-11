@@ -32,11 +32,6 @@ except OSError:
     print("WARNING: GnuPG not available, using MockGPG for migration.")
 # ----------------------------------------------
 
-# --- MONKEY PATCH FOR POSTGRESQL VERSION CHECK ---
-from django.db.backends.postgresql.base import DatabaseWrapper
-DatabaseWrapper.check_database_version_supported = lambda self: None
-# -----------------------------------------------
-
 from celery.schedules import crontab
 from dateparser.languages.loader import LocaleDataLoader
 from django.utils.translation import gettext_lazy as _
@@ -332,6 +327,13 @@ SCRATCH_DIR = __get_path(
 ###############################################################################
 
 env_apps = __get_list("PAPERLESS_APPS")
+
+# --- MONKEY PATCH FOR POSTGRES VERSION CHECK ---
+from django.db.backends.postgresql.base import DatabaseWrapper as PGDatabaseWrapper
+def check_database_version_supported(self):
+    pass
+PGDatabaseWrapper.check_database_version_supported = check_database_version_supported
+# ---------------------------------------------
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
@@ -1219,11 +1221,20 @@ MAX_IMAGE_PIXELS: Final[int | None] = __get_optional_int(
 GNUPG_HOME = os.getenv("HOME", "/tmp")
 
 # Convert is part of the ImageMagick package
-CONVERT_BINARY = os.getenv("PAPERLESS_CONVERT_BINARY", "convert")
+if os.name == "nt":
+    CONVERT_BINARY = os.getenv("PAPERLESS_CONVERT_BINARY", "magick")
+else:
+    CONVERT_BINARY = os.getenv("PAPERLESS_CONVERT_BINARY", "convert")
+
+print(f"DEBUG: settings.CONVERT_BINARY set to: {CONVERT_BINARY} (os.name={os.name})")
+
 CONVERT_TMPDIR = os.getenv("PAPERLESS_CONVERT_TMPDIR")
 CONVERT_MEMORY_LIMIT = os.getenv("PAPERLESS_CONVERT_MEMORY_LIMIT")
 
-GS_BINARY = os.getenv("PAPERLESS_GS_BINARY", "gs")
+if os.name == "nt":
+    GS_BINARY = os.getenv("PAPERLESS_GS_BINARY", "gswin64c")
+else:
+    GS_BINARY = os.getenv("PAPERLESS_GS_BINARY", "gs")
 
 # Fallback layout for .eml consumption
 EMAIL_PARSE_DEFAULT_LAYOUT = __get_int(
