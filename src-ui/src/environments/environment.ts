@@ -9,7 +9,7 @@ export const environment = {
   apiBaseUrl: '/api/',
   apiVersion: '9',
 
-  appTitle: 'Newel Docs',
+  appTitle: 'Newel-Docs Logo',
   tag: 'dev',
   version: 'DEVELOPMENT',
 
