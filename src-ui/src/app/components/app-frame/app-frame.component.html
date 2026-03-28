@@ -9,14 +9,17 @@
     routerLink="/dashboard" tourAnchor="tour.intro">
 
     <div class="ms-2 ms-md-3 d-inline-block" [class.d-md-none]="slimSidebarEnabled">
-      @if (customAppTitle?.length) {
-      <div class="d-flex flex-column align-items-start custom-title">
-        <span class="title">{{customAppTitle}}</span>
-        <span class="byline text-uppercase font-monospace" i18n>by Newel-Docs</span>
+      <div class="d-flex align-items-center">
+        <img src="/static/logo.png" alt="NewelDoc" class="navbar-logo"
+          style="height: 2.5rem; width: auto; margin-right: 0.5rem;" (error)="$event.target.style.display='none'">
+        @if (customAppTitle?.length) {
+        <div class="d-flex flex-column align-items-start custom-title">
+          <span class="title">{{customAppTitle}}</span>
+        </div>
+        } @else {
+        <span class="h5 mb-0 fw-bold text-primary">NewelDoc</span>
+        }
       </div>
-      } @else {
-      <img src="logo.png" alt="Newel-Docs Logo" class="navbar-logo" style="height: 2.5rem; width: auto;">
-      }
     </div>
   </a>
   <div class="search-container flex-grow-1 py-2 pb-3 pb-sm-2 px-3 ps-md-4 me-sm-auto order-3 order-sm-1">

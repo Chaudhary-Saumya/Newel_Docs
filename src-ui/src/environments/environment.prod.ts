@@ -1,7 +1,8 @@
-// --- AWS PRODUCTION CONFIGURATION ---
-// Enter your AWS Server IP/Domain and Port here
-const SERVER_IP: string = '3.108.201.222';      // e.g. '3.14.15.92' or 'example.com'
-const SERVER_PORT: string = '4200';    // e.g. '8000' (leave empty if using standard 80/443 with domain)
+// --- PRODUCTION CONFIGURATION ---
+// Set SERVER_IP to your server's IP/domain for remote deployment.
+// Leave empty ('') to auto-detect from the browser URL (for local dev on port 8000).
+const SERVER_IP: string = '';      // e.g. '3.108.201.222' or 'example.com'
+const SERVER_PORT: string = '';    // e.g. '8000' (leave empty to auto-detect)
 const PROTOCOL: string = 'http';   // 'http' or 'https'
 
 // Logic to determine the API URL
@@ -17,7 +18,7 @@ export const environment = {
   production: true,
   apiBaseUrl: base_url.href + 'api/',
   apiVersion: '9', // match src/paperless/settings.py
-  appTitle: 'Newel Docs',
+  appTitle: 'Newel-Docs',
   tag: 'prod',
   version: '2.20.3',
   webSocketHost: base_url.host,
